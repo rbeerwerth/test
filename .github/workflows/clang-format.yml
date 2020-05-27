@@ -55,8 +55,10 @@ jobs:
            echo ".cpp/.h files are required to be formatted with ${CLANG_FORMAT}"
            git commit --no-verify --quiet -m "clang-format ${sha}"
            git format-patch --quiet HEAD~
+           mkdir -p ${{ github.workspace }}/artifact
+           mv 0001-clang-format-${sha}.patch ${{ github.workspace }}/artifact/
            echo
-           echo "To fix download ${BUILD_URL}artifact/0001-clang-format-${sha}.patch"
+           echo "To fix download ${{ github.workspace }}/artifact/0001-clang-format-${sha}.patch"
            echo "then run the following in your mantid directory:"
            echo "'git apply /path/to/0001-clang-format-${sha}.patch'"
            echo "and commit the changes."
