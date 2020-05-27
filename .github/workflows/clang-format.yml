@@ -23,7 +23,7 @@ jobs:
         
     - name: run clang-format
       run: |
-        git clone --recursive https://github.com/scgmlz/BornAgain.git
+        git clone https://github.com/scgmlz/BornAgain.git
         cd BornAgain
         git checkout develop
         CLANG_FORMAT=clang-format
