@@ -27,4 +27,39 @@ jobs:
         git clone --recursive https://github.com/scgmlz/BornAgain.git
         cd BornAgain
         git checkout develop
-        clang-format --version
+        CLANG_FORMAT=clang-format
+        ${CLANG_FORMAT} --version
+        if [ "$(git config user.name)" == "" ]; then
+           git config user.name ba-builder
+        fi
+        if [ "$(git config user.email)" == "" ]; then
+           git config user.email "ba-builder@bornagainproject.org"
+        fi
+        sha=`git rev-parse --short HEAD`
+        if [ -x "$(command -v parallel)" ]; then
+           echo "Using GNU parallel"
+           runner="parallel ${CLANG_FORMAT} -i {}"
+        else
+           echo "Using xargs"
+           runner="xargs ${CLANG_FORMAT} -i"
+        fi
+        find BornAgain \( -name '*.cpp' -o -name '*.h' -o -name '*.tcc' \) | ${runner}
+        git add -A
+        echo
+        if git diff --cached --quiet
+        then
+           echo "code is formatted correctly"
+           exit 0
+        else
+           echo "code is not formatted correctly!"
+           echo ".cpp/.h files are required to be formatted with ${CLANG_FORMAT}"
+           git commit --no-verify --quiet -m "clang-format ${sha}"
+           git format-patch --quiet HEAD~
+           echo
+           echo "To fix download ${BUILD_URL}artifact/0001-clang-format-${sha}.patch"
+           echo "then run the following in your mantid directory:"
+           echo "'git apply /path/to/0001-clang-format-${sha}.patch'"
+           echo "and commit the changes."
+           echo
+           exit 1
+        fi
