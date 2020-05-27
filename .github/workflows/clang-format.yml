@@ -36,7 +36,6 @@ jobs:
            git config user.email "ba-builder@bornagainproject.org"
         fi
         sha=`git rev-parse --short HEAD`
-        ${{env.sha}}=`git rev-parse --short HEAD`
         if [ -x "$(command -v parallel)" ]; then
            echo "Using GNU parallel"
            runner="parallel ${CLANG_FORMAT} -i {}"
@@ -56,10 +55,11 @@ jobs:
            echo ".cpp/.h files are required to be formatted with ${CLANG_FORMAT}"
            git commit --no-verify --quiet -m "clang-format ${sha}"
            git format-patch --quiet HEAD~
+           mv 0001-clang-format-${sha}.patch 0001-clang-format.patch
            echo
-           echo "To fix download 0001-clang-format-${sha}.patch"
+           echo "To fix download 0001-clang-format.patch"
            echo "then run the following in your mantid directory:"
-           echo "'git apply /path/to/0001-clang-format-${sha}.patch'"
+           echo "'git apply /path/to/0001-clang-format.patch'"
            echo "and commit the changes."
            echo
            exit 1
@@ -68,5 +68,5 @@ jobs:
       uses: actions/upload-artifact@v2
       if: failure()
       with:
-         name: 0001-clang-format-${{env.sha}}.patch
-         path: ${{github.workspace}}/BornAgain/0001-clang-format-${{env.sha}}.patch
+         name: 0001-clang-format.patch
+         path: ${{github.workspace}}/BornAgain/0001-clang-format.patch
