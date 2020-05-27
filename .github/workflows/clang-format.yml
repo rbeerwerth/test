@@ -67,5 +67,5 @@ jobs:
       uses: actions/upload-artifact@v2
       if: failure()
       with:
-         name: 0001-clang-format-${sha}.patch
-         path: $HOME/BornAgain/0001-clang-format-${sha}.patch
+         name: 0001-clang-format-${{env.sha}}.patch
+         path: ${{github.workspace}}/BornAgain/0001-clang-format-${{env.sha}}.patch
