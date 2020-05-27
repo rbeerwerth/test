@@ -23,7 +23,6 @@ jobs:
         
     - name: run clang-format
       run: |
-        cd $HOME
         git clone --recursive https://github.com/scgmlz/BornAgain.git
         cd BornAgain
         git checkout develop
@@ -55,9 +54,9 @@ jobs:
            echo ".cpp/.h files are required to be formatted with ${CLANG_FORMAT}"
            git commit --no-verify --quiet -m "clang-format ${sha}"
            git format-patch --quiet HEAD~
-           mv 0001-clang-format-${sha}.patch 0001-clang-format.patch
+           mv 0001-clang-format-${sha}.patch ${{github.workspace}}/0001-clang-format.patch
            echo
-           echo "To fix download 0001-clang-format.patch"
+           echo "To fix download ${{github.workspace}}/0001-clang-format.patch"
            echo "then run the following in your mantid directory:"
            echo "'git apply /path/to/0001-clang-format.patch'"
            echo "and commit the changes."
@@ -69,4 +68,4 @@ jobs:
       if: failure()
       with:
          name: 0001-clang-format.patch
-         path: ${{github.workspace}}/BornAgain/0001-clang-format.patch
+         path: ${{github.workspace}}/0001-clang-format.patch
