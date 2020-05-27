@@ -43,7 +43,7 @@ jobs:
            echo "Using xargs"
            runner="xargs ${CLANG_FORMAT} -i"
         fi
-        find BornAgain \( -name '*.cpp' -o -name '*.h' -o -name '*.tcc' \) | ${runner}
+        find . \( -name '*.cpp' -o -name '*.h' -o -name '*.tcc' \) | ${runner}
         git add -A
         echo
         if git diff --cached --quiet
