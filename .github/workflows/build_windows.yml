@@ -93,11 +93,12 @@ jobs:
         $Env:Path += ";${{github.workspace}}\deps\lib"
         $Env:QTDIR += ";${{ github.workspace }}\qt5"
         $env:GIT_REDIRECT_STDERR = '2>&1'
+        echo $Env:BOOST_ROOT
         cd ${{github.workspace}}
         git clone --recursive https://github.com/scgmlz/BornAgain.git
         cd BornAgain
         git checkout develop
         mkdir build
         cd build
-        cmake -G "Visual Studio 16 2019"  -DCMAKE_INCLUDE_PATH=${{github.workspace}}/deps/include ..
+        cmake -G "Visual Studio 16 2019"  -DBOOST_ROOT=${{env.BOOST_ROOT}} -DCMAKE_INCLUDE_PATH=${{github.workspace}}/deps/include ..
         cmake --build . --config Release
