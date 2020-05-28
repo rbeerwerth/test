@@ -29,6 +29,22 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
         
+    - name: Install Qt5
+      uses: jurplel/install-qt-action@v2
+      with:
+        version: '5.14.2'
+        host: 'windows'
+        target: 'desktop'
+        arch: 'win64_msvc2019_64'
+        dir: '${{ github.workspace }}/qt5/'
+        install-deps: 'true'
+        modules: 'qtcharts qtwebengine qtsvg'
+        mirror: 'http://mirrors.ocf.berkeley.edu/qt/'
+        cached: 'false'
+        aqtversion: '==0.8'
+        py7zrversion: '==0.6'
+        extra: '--external 7z'
+        
     - name: Install Python packages
       run: |
         python -m pip install --upgrade pip
@@ -39,11 +55,7 @@ jobs:
       shell: powershell
       run: |
         $Env:Path += ";C:\msys64\usr\bin"
-        pacman -Ss libgsl
-        pacman -Ss qt5
-        pacman -Ss libtiff
-        pacman -Ss libcblas
-        pacman -Ss libfftw3
+        pacman -Ss gsl
         
     # use ccache for building BornAgain, might save time
     - name: Prepare ccache timestamp
