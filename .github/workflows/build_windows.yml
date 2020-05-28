@@ -37,7 +37,6 @@ jobs:
         
     - name: setup dependencies
       run: |
-        pacman -S wget
         dir C:\msys64
         
     # use ccache for building BornAgain, might save time
