@@ -88,7 +88,7 @@ jobs:
         CCACHE_COMPRESS: "true"
         CCACHE_COMPRESSLEVEL: "6"
         CCACHE_MAXSIZE: "400M"
-        BOOST_ROOT: $BOOST_ROOT_1_72_0
+        BOOST_ROOT: ${{env.BOOST_ROOT_1_72_0}}
       run: |
         $Env:Path += ";${{github.workspace}}\deps\lib"
         $Env:QTDIR += ";${{ github.workspace }}\qt5"
