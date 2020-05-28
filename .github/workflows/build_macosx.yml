@@ -84,20 +84,16 @@ jobs:
         ccache -s
         
     - name: Check
+      shell: bash
       run: |
         cd $HOME/BornAgain/build
+        pwd
         make -j4 check
         ctest -j4
-        echo "================================="
-        cat Testing/Temporary/LastTest.log
-        echo "================================="
-        cp Testing/Temporary/LastTest.log ${{github.workspace}}/LastTest.log
-        echo ${{github.workspace}}
-        ls -l ${{github.workspace}}
         
     - name: upload test logs
       uses: actions/upload-artifact@v2
       if: failure()
       with:
          name: LastTest.log
-         path: ${{github.workspace}}/LastTest.log
+         path: /Users/runner/BornAgain/build/Testing/Temporary/LastTest.log
