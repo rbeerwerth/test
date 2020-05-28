@@ -54,7 +54,7 @@ jobs:
         $Env:Path += ";C:\msys64\usr\bin"
         cd ${{github.workspace}}
         mkdir deps
-        wget -q http://apps.jcns.fz-juelich.de/src/WinLibs/libgsl.win64.zip -O ${{runner.temp}}\libgsl.zip
+        wget http://apps.jcns.fz-juelich.de/src/WinLibs/libgsl.win64.zip -O ${{runner.temp}}\libgsl.zip
         7z x ${{runner.temp}}\libgsl.zip -o deps
         dir deps
         
