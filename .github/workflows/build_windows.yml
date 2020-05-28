@@ -89,11 +89,10 @@ jobs:
         CCACHE_COMPRESS: "true"
         CCACHE_COMPRESSLEVEL: "6"
         CCACHE_MAXSIZE: "400M"
-        BOOST_ROOT: ${{env.BOOST_ROOT_1_72_0}}
       run: |
-        PATH = ${{github.workspace}}\deps\lib;%PATH%
-        QTDIR = "${{ github.workspace }}\qt5"
-        BOOST_ROOT=%BOOST_ROOT_1_72_0%
+        set PATH = ${{github.workspace}}\deps\lib;%PATH%
+        set QTDIR = "${{ github.workspace }}\qt5"
+        set BOOST_ROOT=%BOOST_ROOT_1_72_0%
         echo %BOOST_ROOT%
         cd ${{github.workspace}}
         git clone --recursive https://github.com/scgmlz/BornAgain.git
