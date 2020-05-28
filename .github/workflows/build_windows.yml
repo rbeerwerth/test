@@ -34,11 +34,6 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install wheel setuptools
         python -m pip install numpy scipy matplotlib
-        python -m pip install aqtinstall py7zr
-        
-    - name: Install Qt5
-      run: |
-        python -m aqt install '5.14.2' 'windows' 'desktop' 'win64_msvc2019_64' -O '${{ github.workspace }}/qt5/' -m 'qtcharts qtwebengine qtsvg'
         
     - name: setup dependencies
       shell: powershell
