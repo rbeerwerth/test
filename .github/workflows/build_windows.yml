@@ -39,7 +39,11 @@ jobs:
       shell: powershell
       run: |
         $Env:Path += ";C:\msys64\usr\bin"
-        pacman -Ss wget
+        pacman -Ss libgsl
+        pacman -Ss qt5
+        pacman -Ss libtiff
+        pacman -Ss libcblas
+        pacman -Ss libfftw3
         
     # use ccache for building BornAgain, might save time
     - name: Prepare ccache timestamp
