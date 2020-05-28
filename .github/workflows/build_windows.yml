@@ -38,7 +38,7 @@ jobs:
     - name: setup dependencies
       shell: powershell
       run: |
-        set PATH=%PATH%;C:\msys64\usr\bin
+        $Env:Path += ";C:\msys64\usr\bin"
         pacman -Ss wget
         
     # use ccache for building BornAgain, might save time
