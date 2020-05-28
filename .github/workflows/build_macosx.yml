@@ -99,9 +99,12 @@ jobs:
          path: /Users/runner/BornAgain/build/Testing/Temporary/LastTest.log
          
     - name: Build package
+      env:
+        QTDIR: /usr/local/opt/qt
       shell: bash
       run: |
         cd $HOME/BornAgain/build
+        echo $QTDIR
         cpack -V
         
     - name: upload package
