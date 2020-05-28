@@ -32,6 +32,8 @@ jobs:
     - name: setup dependencies
       run: |
         brew install cmake fftw gsl boost qt5 libtiff ccache
+        echo "Qt5 is installed to"
+        echo $QTDIR
     - name: Install Python packages
       run: |
         python -m pip install --upgrade pip
@@ -71,7 +73,8 @@ jobs:
         cd BornAgain
         git checkout develop
         mkdir build && cd build
-        cmake DBORNAGAIN_APPLE_BUNDLE=ON -DCMAKE_C_COMPILER_LAUNCHER=ccache \
+        cmake -DCMAKE_PREFIX_PATH=/usr/local -DBORNAGAIN_APPLE_BUNDLE=ON \
+          -DCMAKE_C_COMPILER_LAUNCHER=ccache \
           -DCMAKE_CXX_COMPILER_LAUNCHER=ccache ../
         make -j4
         # print statistics for ccache
