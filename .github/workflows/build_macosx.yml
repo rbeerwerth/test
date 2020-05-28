@@ -88,10 +88,11 @@ jobs:
         cd $HOME/BornAgain/build
         make -j4 check
         ctest -j4
+        mv Testing/Temporary/LastTest.log ${{github.workspace}}/LastTest.log
         
     - name: upload test logs
       uses: actions/upload-artifact@v2
       if: failure()
       with:
          name: LastTest.log
-         path: ${{github.workspace}}/BornAgain/build/Testing/Temporary/LastTest.log
+         path: ${{github.workspace}}/LastTest.log
