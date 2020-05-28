@@ -89,7 +89,7 @@ jobs:
         cd $HOME/BornAgain/build
         pwd
         make -j4 check
-        ctest -j4
+        #ctest -j4
         
     - name: upload test logs
       uses: actions/upload-artifact@v2
@@ -97,3 +97,17 @@ jobs:
       with:
          name: LastTest.log
          path: /Users/runner/BornAgain/build/Testing/Temporary/LastTest.log
+         
+    - name: Build package
+      shell: bash
+      run: |
+        cd $HOME/BornAgain/build
+        cpack -V
+        
+    - name: upload package
+      uses: actions/upload-artifact@v2
+      if: success()
+      with:
+         name: BornAgain
+         path: /Users/runner/BornAgain/build/*.dmg
+
