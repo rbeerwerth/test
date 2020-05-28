@@ -92,6 +92,7 @@ jobs:
       run: |
         $Env:Path += ";${{github.workspace}}\deps\lib"
         $Env:QTDIR += ";${{ github.workspace }}\qt5"
+        $env:GIT_REDIRECT_STDERR = '2>&1'
         cd ${{github.workspace}}
         git clone --recursive https://github.com/scgmlz/BornAgain.git
         cd BornAgain
