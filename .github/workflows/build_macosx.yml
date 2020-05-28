@@ -67,13 +67,16 @@ jobs:
         CMAKE_CXX_STANDARD: 14
         PYTHON_VERSION: 3.8
         LLVM_BC_GENERATOR: /usr/bin/clang++
+        LDFLAGS: "-L/usr/local/opt/qt/lib"
+        CPPFLAGS: "-I/usr/local/opt/qt/include"
       run: |
+        echo 'export PATH="/usr/local/opt/qt/bin:$PATH"' >> /Users/runner/.bash_profile
         cd $HOME
         git clone --recursive https://github.com/scgmlz/BornAgain.git
         cd BornAgain
         git checkout develop
         mkdir build && cd build
-        cmake -DCMAKE_PREFIX_PATH=/usr/local -DBORNAGAIN_APPLE_BUNDLE=ON \
+        cmake -DCMAKE_PREFIX_PATH=/usr/local/opt/qt -DBORNAGAIN_APPLE_BUNDLE=ON \
           -DCMAKE_C_COMPILER_LAUNCHER=ccache \
           -DCMAKE_CXX_COMPILER_LAUNCHER=ccache ../
         make -j4
