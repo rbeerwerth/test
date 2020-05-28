@@ -36,8 +36,9 @@ jobs:
         python -m pip install numpy scipy matplotlib
         
     - name: setup dependencies
+      shell: powershell
       run: |
-        dir C:\msys64
+        dir C:\msys64\usr\bin
         
     # use ccache for building BornAgain, might save time
     - name: Prepare ccache timestamp
@@ -69,3 +70,4 @@ jobs:
         cd BornAgain
         git checkout develop
         mkdir build
+        echo "OK"
