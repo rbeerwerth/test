@@ -37,7 +37,14 @@ jobs:
         mkdir deps
         wget http://apps.jcns.fz-juelich.de/src/WinLibs/libgsl.win64.zip -O ${{runner.temp}}\libgsl.zip
         7z x ${{runner.temp}}\libgsl.zip -odeps
+        wget http://apps.jcns.fz-juelich.de/src/WinLibs/libtiff.win64.zip -O ${{runner.temp}}\libtiff.zip
+        7z x ${{runner.temp}}\libtiff.zip -odeps
+        wget http://apps.jcns.fz-juelich.de/src/WinLibs/libcblas.win64.zip -O ${{runner.temp}}\libcblas.zip
+        7z x ${{runner.temp}}\libcblas.zip -odeps
+        wget http://apps.jcns.fz-juelich.de/src/WinLibs/libfftw3.win64.zip -O ${{runner.temp}}\libfftw3.zip
+        7z x ${{runner.temp}}\libfftw3.zip -odeps
         dir deps
+        dir deps/include
         
     - name: Install Python packages
       run: |
@@ -83,9 +90,13 @@ jobs:
         CCACHE_MAXSIZE: "400M"
         BOOST_ROOT: $BOOST_ROOT_1_72_0
       run: |
+        $Env:Path += ";${{github.workspace}}\deps\lib"
+        $Env:QTDIR += ";${{ github.workspace }}\qt5"
         cd ${{github.workspace}}
         git clone --recursive https://github.com/scgmlz/BornAgain.git
         cd BornAgain
         git checkout develop
         mkdir build
-        echo "OK"
+        cd build
+        cmake -G "Visual Studio 16 2019"  -DCMAKE_INCLUDE_PATH=${{github.workspace}}/deps/include ..
+        cmake --build . --config Release
