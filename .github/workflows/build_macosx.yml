@@ -91,3 +91,10 @@ jobs:
         cd $HOME
         sudo rm -rf BornAgain
         cd $GITHUB_WORKSPACE
+        
+    - name: upload test logs
+      uses: actions/upload-artifact@v2
+      if: failure()
+      with:
+         name: LastTest.log
+         path: ${{github.workspace}}/BornAgain/build/Testing/Temporary/LastTest.log
