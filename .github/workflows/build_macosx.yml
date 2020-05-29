@@ -7,8 +7,7 @@ name: CI
 on:
   push:
     branches: [ master ]
-    paths-ignore: 
-      - '.github/**'
+    
   pull_request:
     branches: [ master ]
 
@@ -77,6 +76,7 @@ jobs:
         git clone --recursive https://github.com/scgmlz/BornAgain.git
         cd BornAgain
         git checkout develop
+        git revert a80f36b
         mkdir build && cd build
         cmake -DCMAKE_PREFIX_PATH=/usr/local/opt/qt -DBORNAGAIN_APPLE_BUNDLE=ON \
           -DCMAKE_C_COMPILER_LAUNCHER=ccache \
@@ -91,7 +91,7 @@ jobs:
         cd $HOME/BornAgain/build
         pwd
         make -j4 check
-        #ctest -j4
+        ctest -j4
         
     - name: upload test logs
       uses: actions/upload-artifact@v2
