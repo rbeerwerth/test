@@ -89,7 +89,6 @@ jobs:
       shell: bash
       run: |
         cd $HOME/BornAgain/build
-        pwd
         make -j4 check
         ctest -j4
         
