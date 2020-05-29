@@ -7,8 +7,7 @@ name: CI
 on:
   push:
     branches: [ master ]
-    paths-ignore: 
-      - '.github/**'
+   
   pull_request:
     branches: [ master ]
 
@@ -99,9 +98,9 @@ jobs:
         echo %QTDIR%
         echo %CMAKE_INC_PATH%
         cd ${{github.workspace}}
-        git clone --recursive https://github.com/scgmlz/BornAgain.git
+        git clone --recursive https://github.com/gpospelov/BornAgain.git
         cd BornAgain
-        git checkout develop
+        git checkout NoManhattan
         mkdir build
         cd build
         cmake -G "Visual Studio 16 2019"  -DCMAKE_INCLUDE_PATH=%CMAKE_INC_PATH% ..
