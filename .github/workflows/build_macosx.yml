@@ -63,11 +63,11 @@ jobs:
         CCACHE_COMPRESS: "true"
         CCACHE_COMPRESSLEVEL: "6"
         CCACHE_MAXSIZE: "400M"
-        CXX: clang++
+        CXX: g++++
         USE_CPP: 14
         CMAKE_CXX_STANDARD: 14
         PYTHON_VERSION: 3.8
-        LLVM_BC_GENERATOR: /usr/bin/clang++
+        LLVM_BC_GENERATOR: /usr/bin/g++++
         LDFLAGS: "-L/usr/local/opt/qt/lib"
         CPPFLAGS: "-I/usr/local/opt/qt/include"
       run: |
@@ -99,19 +99,19 @@ jobs:
          name: LastTest.log
          path: /Users/runner/BornAgain/build/Testing/Temporary/LastTest.log
          
-    - name: Build package
-      env:
-        QTDIR: /usr/local/opt/qt
-      shell: bash
-      run: |
-        cd $HOME/BornAgain/build
-        echo $QTDIR
-        cpack -V
+    #- name: Build package
+      #env:
+        #QTDIR: /usr/local/opt/qt
+      #shell: bash
+      #run: |
+        #cd $HOME/BornAgain/build
+        #echo $QTDIR
+        #cpack -V
         
-    - name: upload package
-      uses: actions/upload-artifact@v2
-      if: success()
-      with:
-         name: BornAgain
-         path: /Users/runner/BornAgain/build/*.dmg
+    #- name: upload package
+      #uses: actions/upload-artifact@v2
+      #if: success()
+      #with:
+         #name: BornAgain
+         #path: /Users/runner/BornAgain/build/*.dmg
 
