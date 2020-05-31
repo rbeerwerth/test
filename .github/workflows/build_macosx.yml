@@ -73,10 +73,10 @@ jobs:
       run: |
         echo 'export PATH="/usr/local/opt/qt/bin:$PATH"' >> /Users/runner/.bash_profile
         cd $HOME
-        git clone --recursive https://github.com/jwuttke/BornAgain
-        git checkout ff6
+        git clone https://github.com/jwuttke/BornAgain
+        git submodule update --init
         cd BornAgain
-        git checkout develop
+        git checkout ff6
         mkdir build && cd build
         cmake -DCMAKE_PREFIX_PATH=/usr/local/opt/qt -DBORNAGAIN_APPLE_BUNDLE=ON \
           -DCMAKE_C_COMPILER_LAUNCHER=ccache \
