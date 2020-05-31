@@ -32,6 +32,9 @@ jobs:
 
     - name: setup dependencies
       run: |
+        brew install gcc
+        gcc --version
+        g++ --version
         brew install cmake fftw gsl boost qt5 libtiff ccache
         echo "Qt5 is installed to"
         echo $QTDIR
