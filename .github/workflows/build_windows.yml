@@ -92,7 +92,7 @@ jobs:
         CCACHE_MAXSIZE: "400M"
       run: |
         set PATH=${{github.workspace}}\deps\lib;%PATH%
-        set QTDIR=${{github.workspace}}\qt5
+        set QTDIR=${{github.workspace}}\qt5\Qt\5.14.2\msvc2017_64
         set CMAKE_INC_PATH=${{github.workspace}}/deps/include
         echo %BOOST_ROOT%
         echo %QTDIR%
@@ -108,6 +108,7 @@ jobs:
         
     - name: Run unittest core
       shell: cmd
+      if: failure()
       run: |
         echo %PATH%
         echo %QTDIR%
@@ -115,6 +116,7 @@ jobs:
           
     - name: Run unittest GUI
       shell: cmd
+      if: failure()
       run: |
         echo %PATH%
         echo %QTDIR%
