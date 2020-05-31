@@ -89,6 +89,7 @@ jobs:
       shell: bash
       run: |
         cd $HOME/BornAgain/build
+        bin/UnitTestNumeric
         ctest -j4
         
     - name: upload test logs
