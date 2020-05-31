@@ -32,9 +32,8 @@ jobs:
 
     - name: setup dependencies
       run: |
-        brew install gcc
-        gcc --version
-        g++ --version
+        gcc-9 --version
+        g++-9 --version
         brew install cmake fftw gsl boost qt5 libtiff ccache
         echo "Qt5 is installed to"
         echo $QTDIR
@@ -81,6 +80,7 @@ jobs:
         git submodule update --init
         git checkout ff6
         mkdir build && cd build
+        export CC=gcc
         cmake -DCMAKE_PREFIX_PATH=/usr/local/opt/qt -DBORNAGAIN_APPLE_BUNDLE=ON \
           -DCMAKE_C_COMPILER_LAUNCHER=ccache \
           -DCMAKE_CXX_COMPILER_LAUNCHER=ccache ../
