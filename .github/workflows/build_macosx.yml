@@ -63,11 +63,11 @@ jobs:
         CCACHE_COMPRESS: "true"
         CCACHE_COMPRESSLEVEL: "6"
         CCACHE_MAXSIZE: "400M"
-        CXX: g++++
+        CXX: g++
         USE_CPP: 14
         CMAKE_CXX_STANDARD: 14
         PYTHON_VERSION: 3.8
-        LLVM_BC_GENERATOR: /usr/bin/g++++
+        LLVM_BC_GENERATOR: /usr/bin/g++
         LDFLAGS: "-L/usr/local/opt/qt/lib"
         CPPFLAGS: "-I/usr/local/opt/qt/include"
       run: |
