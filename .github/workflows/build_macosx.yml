@@ -74,8 +74,8 @@ jobs:
         echo 'export PATH="/usr/local/opt/qt/bin:$PATH"' >> /Users/runner/.bash_profile
         cd $HOME
         git clone https://github.com/jwuttke/BornAgain
-        git submodule update --init
         cd BornAgain
+        git submodule update --init
         git checkout ff6
         mkdir build && cd build
         cmake -DCMAKE_PREFIX_PATH=/usr/local/opt/qt -DBORNAGAIN_APPLE_BUNDLE=ON \
