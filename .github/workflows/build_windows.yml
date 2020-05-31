@@ -92,7 +92,7 @@ jobs:
         CCACHE_MAXSIZE: "400M"
       run: |
         set PATH=${{github.workspace}}\deps\lib;%PATH%
-        set QTDIR="${{github.workspace}}\qt5"
+        set QTDIR=${{github.workspace}}\qt5
         set CMAKE_INC_PATH=${{github.workspace}}/deps/include
         echo %BOOST_ROOT%
         echo %QTDIR%
@@ -105,3 +105,17 @@ jobs:
         cd build
         cmake -G "Visual Studio 16 2019"  -DCMAKE_INCLUDE_PATH=%CMAKE_INC_PATH% ..
         cmake --build . --config Release
+        
+    - name: Run unittest core
+      shell: cmd
+      run: |
+        echo %PATH%
+        echo %QTDIR%
+        bin\UnitTestCore.exe
+          
+    - name: Run unittest GUI
+      shell: cmd
+      run: |
+        echo %PATH%
+        echo %QTDIR%
+        bin\UnitTestGUI.exe
