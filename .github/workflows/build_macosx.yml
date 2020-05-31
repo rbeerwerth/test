@@ -75,10 +75,10 @@ jobs:
       run: |
         echo 'export PATH="/usr/local/opt/qt/bin:$PATH"' >> /Users/runner/.bash_profile
         cd $HOME
-        git clone --recursive https://github.com/scgmlz/BornAgain.git
+        git clone --recursive https://github.com/jwuttke/BornAgain
+        git checkout ff6
         cd BornAgain
         git checkout develop
-        git revert -m 1 a80f36b
         mkdir build && cd build
         cmake -DCMAKE_PREFIX_PATH=/usr/local/opt/qt -DBORNAGAIN_APPLE_BUNDLE=ON \
           -DCMAKE_C_COMPILER_LAUNCHER=ccache \
@@ -91,7 +91,6 @@ jobs:
       shell: bash
       run: |
         cd $HOME/BornAgain/build
-        make -j4 check
         ctest -j4
         
     - name: upload test logs
